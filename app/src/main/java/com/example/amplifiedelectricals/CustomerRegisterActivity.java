@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 public class CustomerRegisterActivity extends AppCompatActivity {
 
     EditText firstNameET, lastNameET, emailET, addressLine1ET, addressLine2ET, countyET, countryET, postcodeET, passwordET;
+    TextView switchToLogin;
     Button registerButton;
     private FirebaseAuth mAuth;
 
@@ -95,6 +97,22 @@ public class CustomerRegisterActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
+        switchToLogin = findViewById(R.id.switchToLogin);
+        switchToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerRegisterActivity.this, CustomerLoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
 }
