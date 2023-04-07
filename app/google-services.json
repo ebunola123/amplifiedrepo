@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "152326250885",
+    "firebase_url": "https://amplifyelectrics-default-rtdb.firebaseio.com",
+    "project_id": "amplifyelectrics",
+    "storage_bucket": "amplifyelectrics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152326250885:android:21df443262480d7acea4ec",
+        "android_client_info": {
+          "package_name": "com.example.amplifiedelectricals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152326250885-b54k6gdtdp0ko4dpj1h40hougcmgrrq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB43L6pIUWzLMYAHaO4_3Yvp7wxzDmEPag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152326250885-b54k6gdtdp0ko4dpj1h40hougcmgrrq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
