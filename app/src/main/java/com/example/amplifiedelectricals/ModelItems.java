@@ -4,11 +4,11 @@ public class ModelItems {
 
     String title;
     String manufacturer;
-    double price;
+    String price;
     String category;
     int image;
 
-    public ModelItems(String title, String manufacturer, double price, String category, int image) {
+    public ModelItems(String title, String manufacturer, String price, String category, int image) {
         this.title = title;
         this.manufacturer = manufacturer;
         this.price = price;
@@ -36,11 +36,11 @@ public class ModelItems {
         this.manufacturer = manufacturer;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

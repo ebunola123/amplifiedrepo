@@ -40,5 +40,14 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
 
+        viewItem = findViewById(R.id.viewItem);
+        viewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this, AdminViewItemActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

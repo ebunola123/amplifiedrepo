@@ -59,7 +59,7 @@ public class AdminAddItemActivity extends AppCompatActivity {
                 itemHashmap.put("title", title);
                 itemHashmap.put("manufacturer", manufacturer);
                 itemHashmap.put("category", category);
-                itemHashmap.put("price", price);
+                itemHashmap.put("price", priceString);
                 itemHashmap.put("itemID", itemID);
 
                 reference.child(itemID).setValue(itemHashmap);
