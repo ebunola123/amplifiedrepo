@@ -6,14 +6,16 @@ public class ModelItems {
     String manufacturer;
     String price;
     String category;
+    String itemID;
     int image;
 
-    public ModelItems(String title, String manufacturer, String price, String category, int image) {
+    public ModelItems(String title, String manufacturer, String price, String category, int image, String itemID) {
         this.title = title;
         this.manufacturer = manufacturer;
         this.price = price;
         this.category = category;
         this.image = image;
+        this.itemID = itemID;
     }
 
     public ModelItems(){
@@ -58,5 +60,13 @@ public class ModelItems {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 }

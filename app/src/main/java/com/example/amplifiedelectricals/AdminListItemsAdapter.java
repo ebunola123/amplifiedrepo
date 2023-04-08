@@ -1,6 +1,7 @@
 package com.example.amplifiedelectricals;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,17 @@ public class AdminListItemsAdapter extends RecyclerView.Adapter<AdminListItemsAd
         holder.priceTV.setText(items.getPrice());
         holder.categoryTV.setText(items.getCategory());
         holder.manTV.setText(items.getManufacturer());
+
+        String itemID = items.getItemID();
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ItemProfileActivity.class);
+                intent.putExtra("itemID", itemID);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
