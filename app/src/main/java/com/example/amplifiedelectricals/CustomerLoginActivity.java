@@ -49,9 +49,16 @@ public class CustomerLoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(CustomerLoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
+
+                            if(email.equalsIgnoreCase("admin@gmail.com") && password.equals("password")){
+                                Intent intent = new Intent(CustomerLoginActivity.this, AdminMainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(CustomerLoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+
+                        }else {
                             Toast.makeText(CustomerLoginActivity.this, "Login Failed, Please Try Again", Toast.LENGTH_SHORT).show();
                         }
                     }
