@@ -49,5 +49,15 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
 
+        updateStock = findViewById(R.id.updateStock);
+        updateStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this, UpdateStockListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

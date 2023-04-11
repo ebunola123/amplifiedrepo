@@ -65,6 +65,13 @@ public class AdminAddItemActivity extends AppCompatActivity {
                 reference.child(itemID).setValue(itemHashmap);
                 Toast.makeText(AdminAddItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
 
+                DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("StockLevel").child(itemID);
+                HashMap<String, Object> stockHashmap = new HashMap<>();
+                String stock = "0";
+                stockHashmap.put("itemID", itemID);
+                stockHashmap.put("stock", stock);
+                reference2.setValue(stockHashmap);
+
 
             }
         });
