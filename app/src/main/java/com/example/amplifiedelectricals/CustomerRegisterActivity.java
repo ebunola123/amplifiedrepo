@@ -67,6 +67,10 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             HashMap<String, Object> customerHashmap = new HashMap<>();
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                            String customerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
                             customerHashmap.put("firstName", firstName);
                             customerHashmap.put("lastName", lastName);
@@ -76,15 +80,16 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                             customerHashmap.put("county", county);
                             customerHashmap.put("country", country);
                             customerHashmap.put("postcode", postcode);
+                            customerHashmap.put("customerID", customerID);
 
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
                             reference.setValue(customerHashmap);
                             reference.push();
 
                             Toast.makeText(CustomerRegisterActivity.this, "Registration Success!", Toast.LENGTH_SHORT).show();
 
 
-                            Intent intent = new Intent(CustomerRegisterActivity.this, MainActivity.class);
+                            Intent intent = new Intent(CustomerRegisterActivity.this, CustomerMainActivity.class);
                             startActivity(intent);
 
                         } else {

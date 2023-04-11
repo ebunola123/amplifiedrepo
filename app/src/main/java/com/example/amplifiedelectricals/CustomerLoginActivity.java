@@ -54,7 +54,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(CustomerLoginActivity.this, AdminMainActivity.class);
                                 startActivity(intent);
                             } else {
-                                Intent intent = new Intent(CustomerLoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(CustomerLoginActivity.this, CustomerMainActivity.class);
                                 startActivity(intent);
                             }
 

@@ -18,16 +18,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AdminViewItemActivity extends AppCompatActivity {
+public class CustomerListItemsActivity extends AppCompatActivity {
 
-    AdminListItemsAdapter adapter;
+    CustomerListItemsAdapter adapter;
     RecyclerView recyclerView;
     ArrayList<ModelItems> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_view_item);
+        setContentView(R.layout.activity_customer_list_items);
 
         FirebaseAuth auth= FirebaseAuth.getInstance();
         FirebaseUser currentUser=auth.getCurrentUser();
@@ -37,11 +37,13 @@ public class AdminViewItemActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        Intent i = getIntent();
+        String customerID = i.getStringExtra("customerID");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itemList = new ArrayList<>();
-        adapter = new AdminListItemsAdapter(itemList, this);
+        adapter = new CustomerListItemsAdapter(itemList, this, customerID);
         recyclerView.setAdapter(adapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Items");
