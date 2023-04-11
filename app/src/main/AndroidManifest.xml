@@ -13,6 +13,20 @@
         android:theme="@style/Theme.AmplifiedElectricals"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerCheckoutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CustomerCartListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CustomerItemActivity"
             android:exported="false">
             <meta-data

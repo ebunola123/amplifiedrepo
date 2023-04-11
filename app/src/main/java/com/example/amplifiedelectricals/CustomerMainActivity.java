@@ -45,7 +45,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         viewCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerMainActivity.this, CustomerListItemsActivity.class);
+                Intent intent = new Intent(CustomerMainActivity.this, CustomerCartListActivity.class);
                 intent.putExtra("customerID", customerID);
                 startActivity(intent);
             }
