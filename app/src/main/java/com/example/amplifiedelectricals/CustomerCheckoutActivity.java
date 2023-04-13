@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -182,19 +183,21 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
                 for(int i=0; i<idList.size(); i++){
 
-                    if(i>1){
+                    /*if(i>1){
                         idList.clear();
-
+                        idList.remove()
                       //  idList.remove(i-1); //to get rid of the last index value
-                    }
+                    }*/
 
                     id = idList.get(i);
+
+                    String myID= idList.get(i);
                     String qList = quantityList.get(i);
 
 
-                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Orders").child(customerID).child(id);
+                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Orders").child(customerID).child(myID);
                     HashMap<String, Object> orderHashmap = new HashMap<>();
-                    orderHashmap.put("itemID", id);
+                    orderHashmap.put("itemID", myID);
                     orderHashmap.put("quantity",qList);
 
                     reference2.setValue(orderHashmap);
@@ -202,13 +205,15 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
 
 
-                    System.out.println("orderid " + id + "quantity: " + qList);
+                    System.out.println("orderid " + myID + "quantity: " + qList);
 
                    DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("StockLevel").child(id);
                    reference3.addValueEventListener(new ValueEventListener() {
                        @Override
                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                            ModelStock stock = snapshot.getValue(ModelStock.class);
+
+                           System.out.println("ItemID - " + myID);
 
                            String currentStock = stock.getStock();
                             a = Integer.parseInt(currentStock);
@@ -218,9 +223,10 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
                            int c = a - b;
                            System.out.println("c: " +c);
+                           newStock = "0";
                            newStock = Integer.toString(c);
-                           System.out.println("newstock " + newStock);
-                           System.out.println("id " + id);
+                           //System.out.println("newstock " + newStock);
+                          // System.out.println("id " + myID);
 
                            //updateStock(id, newStock);
                            /*HashMap<String, Object> stockHashmap = new HashMap<>();
@@ -229,10 +235,38 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                            stockHashmap.put("stock", newStock);*/
 
                            /*reference3.setValue(stockHashmap);*/
+
                            stockHashmap.clear();
-                           stockHashmap.put("itemID", id);
+                           stockHashmap.put("itemID", myID);
                            stockHashmap.put("stock", newStock);
-                           reference3.setValue(stockHashmap);
+
+
+                           ModelStock ms = new ModelStock(myID, newStock);
+                           ms.setItemID(myID);
+                           ms.setStock(newStock);
+                          /* stockHashmap.clear();
+                           stockHashmap.put("itemID", myID);
+                           stockHashmap.put("stock", newStock);*/
+                           System.out.println("MS " + ms.getItemID() + "Stock: " + ms.getStock());
+
+
+                           if(snapshot.exists()){
+                               reference3.removeValue();
+                               // reference3.updateChildren(stockHashmap);
+                               reference3.setValue(ms);
+
+                           }
+
+                           reference3.updateChildren(stockHashmap,
+                                   )
+
+
+
+
+                           //THIS WORKED - WRONG ID FOR FIRST, AND APP SHUT DOWN
+                          /* reference3.removeValue();
+                          // reference3.updateChildren(stockHashmap);
+                           reference3.setValue(stockHashmap);*/
 
 
                            Toast.makeText(CustomerCheckoutActivity.this, "Order complete", Toast.LENGTH_SHORT).show();
@@ -248,7 +282,10 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
                        }
                    });
-                    //reference3.setValue(stockHashmap);
+                    /*reference3.removeValue();
+                    // reference3.updateChildren(stockHashmap);
+                    reference3.setValue(stockHashmap);
+                    //reference3.setValue(stockHashmap);*/
 
                     /*stockHashmap.put("itemID", id);
                     stockHashmap.put("stock", newStock);
@@ -269,7 +306,10 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                    // System.out.println("newstock: " + newStock);
 
 
-               }
+               } //end for loop
+
+                Intent intent = new Intent(CustomerCheckoutActivity.this, AfterOrderActivity.class);
+                startActivity(intent);
 
             }
         });
