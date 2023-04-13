@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,14 +22,31 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CustomerCheckoutActivity extends AppCompatActivity {
 
     //ArrayList<ModelCart> cartList;
     EditText cardNameET, cardNoET, expiryDateET, cvcET, addressLine1ET, addressLine2ET, countyET, countryET;
+    TextView totalPriceTV;
+    Button purchase;
     CustomerCartListAdapter adapter;
     RecyclerView recyclerView;
     ArrayList<ModelCart> cartList;
+
+    ArrayList<String> idList;
+    ArrayList<String> quantityList;
+
+    String orderItemID, orderQuantity;
+    String currentStock;
+    String id;
+    String newStock;
+
+    int a;
+    int b;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +84,15 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
         String customerID = auth.getUid();
 
+
         Intent i = getIntent();
         String total = i.getStringExtra("totalPrice");
         System.out.println("MY TOTAL - " + total);
 
+        double totalPrice = Double.parseDouble(total);
+
+        totalPriceTV = findViewById(R.id.totalPriceTV);
+        totalPriceTV.setText("Total Price: €" + totalPrice);
 
         //payment details
         cardNameET = findViewById(R.id.cardNameET);
@@ -89,6 +115,9 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
         adapter = new CustomerCartListAdapter(cartList, this);
         recyclerView.setAdapter(adapter);
 
+        idList = new ArrayList<String>();
+        quantityList = new ArrayList<String>();
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Cart").child(customerID);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,6 +125,15 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     ModelCart cart = dataSnapshot.getValue(ModelCart.class);
                     cartList.add(cart);
+
+                    orderItemID = cart.getItemID();
+                    orderQuantity = cart.getQuantity();
+
+                    quantityList.add(cart.getQuantity());
+                    idList.add(cart.getItemID());
+                    System.out.println("idlist" + idList);
+                    System.out.println("quantitylist" + quantityList);
+
 
                 }
                 adapter.notifyDataSetChanged();
@@ -129,7 +167,124 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
         //open stock db
         //if cartlist.contains any of the values
+
+        purchase = findViewById(R.id.purchase);
+        purchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+
+                HashMap<String, Object> stockHashmap = new HashMap<>();
+
+
+                for(int i=0; i<idList.size(); i++){
+
+                    if(i>1){
+                        idList.clear();
+
+                      //  idList.remove(i-1); //to get rid of the last index value
+                    }
+
+                    id = idList.get(i);
+                    String qList = quantityList.get(i);
+
+
+                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Orders").child(customerID).child(id);
+                    HashMap<String, Object> orderHashmap = new HashMap<>();
+                    orderHashmap.put("itemID", id);
+                    orderHashmap.put("quantity",qList);
+
+                    reference2.setValue(orderHashmap);
+
+
+
+
+                    System.out.println("orderid " + id + "quantity: " + qList);
+
+                   DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("StockLevel").child(id);
+                   reference3.addValueEventListener(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(@NonNull DataSnapshot snapshot) {
+                           ModelStock stock = snapshot.getValue(ModelStock.class);
+
+                           String currentStock = stock.getStock();
+                            a = Integer.parseInt(currentStock);
+                            System.out.println("a: " +a);
+                            b = Integer.parseInt(qList);
+                           System.out.println("b: " +b);
+
+                           int c = a - b;
+                           System.out.println("c: " +c);
+                           newStock = Integer.toString(c);
+                           System.out.println("newstock " + newStock);
+                           System.out.println("id " + id);
+
+                           //updateStock(id, newStock);
+                           /*HashMap<String, Object> stockHashmap = new HashMap<>();
+                            */
+                           /*stockHashmap.put("itemID", id);
+                           stockHashmap.put("stock", newStock);*/
+
+                           /*reference3.setValue(stockHashmap);*/
+                           stockHashmap.clear();
+                           stockHashmap.put("itemID", id);
+                           stockHashmap.put("stock", newStock);
+                           reference3.setValue(stockHashmap);
+
+
+                           Toast.makeText(CustomerCheckoutActivity.this, "Order complete", Toast.LENGTH_SHORT).show();
+                       }
+
+
+
+
+
+
+                       @Override
+                       public void onCancelled(@NonNull DatabaseError error) {
+
+                       }
+                   });
+                    //reference3.setValue(stockHashmap);
+
+                    /*stockHashmap.put("itemID", id);
+                    stockHashmap.put("stock", newStock);
+                    reference3.setValue(stockHashmap);*/
+
+
+
+
+
+
+
+                    /*HashMap<String, Object> stockHashmap = new HashMap<>();
+
+                    stockHashmap.put("itemID", id);
+                    stockHashmap.put("stock", newStock);
+                    reference3.setValue(stockHashmap);*/
+
+                   // System.out.println("newstock: " + newStock);
+
+
+               }
+
+            }
+        });
         
         
+    }
+
+
+    public void updateStock(String id, String newStock){
+        DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("StockLevel").child(id);
+        HashMap<String, Object> stockHashmap = new HashMap<>();
+
+        stockHashmap.put("itemID", id);
+        stockHashmap.put("stock", newStock);
+        reference3.setValue(stockHashmap);
+
     }
 }

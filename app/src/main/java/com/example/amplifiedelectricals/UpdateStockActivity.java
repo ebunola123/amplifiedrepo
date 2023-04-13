@@ -78,6 +78,8 @@ public class UpdateStockActivity extends AppCompatActivity {
                 String stock1 = stockLevel.getStock();
                 //int stock = Integer.parseInt(stock1);
                 currentStock.setText(stock1);
+
+
             }
 
             @Override
