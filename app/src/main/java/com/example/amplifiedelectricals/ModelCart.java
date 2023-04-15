@@ -6,15 +6,17 @@ public class ModelCart {
     String title;
     String price;
     String quantity;
+    String manufacturer;
 
     //if quantity is >1, then do quantity * price
 
 
-    public ModelCart(String itemID, String title, String price, String quantity) {
+    public ModelCart(String itemID, String title, String price, String quantity, String manufacturer) {
         this.itemID = itemID;
         this.title = title;
         this.price = price;
         this.quantity = quantity;
+        this.manufacturer = manufacturer;
     }
 
     public ModelCart(){
@@ -51,5 +53,13 @@ public class ModelCart {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 }

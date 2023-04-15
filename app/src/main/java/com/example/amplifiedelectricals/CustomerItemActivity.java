@@ -101,12 +101,14 @@ public class CustomerItemActivity extends AppCompatActivity {
 
                     String title = titleTV.getText().toString();
                     String price = priceTV.getText().toString();
+                    String manufacturer = manufacturerTV.getText().toString();
                     String amount = Integer.toString(count);
 
                     HashMap<String, Object> cartHashmap = new HashMap<>();
 
                     cartHashmap.put("title", title);
                     cartHashmap.put("price", price);
+                    cartHashmap.put("manufacturer", manufacturer);
                     cartHashmap.put("itemID", itemID);
                     cartHashmap.put("quantity", amount);
 

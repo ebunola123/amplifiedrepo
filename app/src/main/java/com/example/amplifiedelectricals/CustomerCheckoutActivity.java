@@ -1,6 +1,7 @@
 package com.example.amplifiedelectricals;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CustomerCheckoutActivity extends AppCompatActivity {
@@ -37,6 +41,10 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
     ArrayList<String> idList;
     ArrayList<String> quantityList;
+    ArrayList<String> priceList;
+    ArrayList<String> titleList;
+    ArrayList<String> manufacturerList;
+    ArrayList<String> updateList = new ArrayList<String>();;
 
     String orderItemID, orderQuantity;
     String currentStock;
@@ -118,6 +126,10 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
         idList = new ArrayList<String>();
         quantityList = new ArrayList<String>();
+        titleList = new ArrayList<String>();
+        priceList = new ArrayList<String>();
+        manufacturerList = new ArrayList<String>();
+        //updateList = new ArrayList<String>();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Cart").child(customerID);
         reference.addValueEventListener(new ValueEventListener() {
@@ -132,6 +144,10 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
                     quantityList.add(cart.getQuantity());
                     idList.add(cart.getItemID());
+                    priceList.add(cart.getPrice());
+                    titleList.add(cart.getTitle());
+                    manufacturerList.add(cart.getManufacturer());
+                    //totalPriceList.add(cart.get);
                     System.out.println("idlist" + idList);
                     System.out.println("quantitylist" + quantityList);
 
@@ -173,15 +189,12 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
+                ArrayList<String> newList = new ArrayList<String>();;
 
                 HashMap<String, Object> stockHashmap = new HashMap<>();
 
-
-                for(int i=0; i<idList.size(); i++){
+                int i;
+                for(i=0; i<idList.size(); i++){
 
                     /*if(i>1){
                         idList.clear();
@@ -193,14 +206,37 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
 
                     String myID= idList.get(i);
                     String qList = quantityList.get(i);
+                    String price = priceList.get(i);
+                    String title = titleList.get(i);
+                    String manufacturer = manufacturerList.get(i);
+                    //String totalPrice;
 
+                    SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+                    Date todayDate = new Date();
+                    String date = currentDate.format(todayDate);
 
-                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Orders").child(customerID).child(myID);
+                    Date time = Calendar.getInstance().getTime();
+
+                    //create order db
+                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Orders").child(customerID);
                     HashMap<String, Object> orderHashmap = new HashMap<>();
                     orderHashmap.put("itemID", myID);
+                    orderHashmap.put("title", title);
+                    orderHashmap.put("manufacturer", manufacturer);
                     orderHashmap.put("quantity",qList);
+                    orderHashmap.put("date",date);
+                    orderHashmap.put("time", time);
+                    orderHashmap.put("price", price);
+                    orderHashmap.put("totalPrice", total);
 
-                    reference2.setValue(orderHashmap);
+                    String orderID = reference2.push().getKey();
+                    orderHashmap.put("orderID",orderID);
+                    reference2.child(myID).setValue(orderHashmap);
+
+
+
+                    DatabaseReference reference5 = FirebaseDatabase.getInstance().getReference("Cart").child(customerID);
+                    reference5.removeValue();
 
 
 
@@ -225,10 +261,17 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                            System.out.println("c: " +c);
                            newStock = "0";
                            newStock = Integer.toString(c);
+                           updateList.add(newStock);
+                           newList.add(newStock);
+                           System.out.println("NEW LIST IN DB REF LOOP: " + newList);
+
+
+                           //PUT AS PARAMS AND SEND TO NEW METHOD
+
                            //System.out.println("newstock " + newStock);
                           // System.out.println("id " + myID);
 
-                           //updateStock(id, newStock);
+                          // updateStock(id, newStock);
                            /*HashMap<String, Object> stockHashmap = new HashMap<>();
                             */
                            /*stockHashmap.put("itemID", id);
@@ -241,58 +284,63 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                            stockHashmap.put("stock", newStock);
 
 
-                           ModelStock ms = new ModelStock(myID, newStock);
+                           /*ModelStock ms = new ModelStock("myID", "newStock");
                            ms.setItemID(myID);
-                           ms.setStock(newStock);
+                           ms.setStock(newStock);*/
                           /* stockHashmap.clear();
                            stockHashmap.put("itemID", myID);
                            stockHashmap.put("stock", newStock);*/
-                           System.out.println("MS " + ms.getItemID() + "Stock: " + ms.getStock());
-
-
-                           if(snapshot.exists()){
-                               reference3.removeValue();
+                        //   System.out.println("MS " + ms.getItemID() + "Stock: " + ms.getStock());
+                         /*  if(snapshot.exists()){
+                              // reference3.removeValue();
                                // reference3.updateChildren(stockHashmap);
                                reference3.setValue(ms);
+                               reference3.setValue(stockHashmap);
+                               finish();
 
-                           }
-
-                           reference3.updateChildren(stockHashmap,
-                                   )
-
+                           }*/
 
 
 
+                         //  reference3.setValue(stockHashmap);
                            //THIS WORKED - WRONG ID FOR FIRST, AND APP SHUT DOWN
-                          /* reference3.removeValue();
+                           reference3.removeValue();
                           // reference3.updateChildren(stockHashmap);
-                           reference3.setValue(stockHashmap);*/
+                           reference3.setValue(stockHashmap);
+
+                         /// reference3.push().setValue(stockHashmap);
+                         // finish();
+                         // reference3.updateChildren(stockHashmap);
+                         // finish();
+                           //trypush
+
 
 
                            Toast.makeText(CustomerCheckoutActivity.this, "Order complete", Toast.LENGTH_SHORT).show();
                        }
-
-
-
-
-
 
                        @Override
                        public void onCancelled(@NonNull DatabaseError error) {
 
                        }
                    });
-                    /*reference3.removeValue();
+
+                   System.out.println("NEW LIST IN FOR LOOP: " + newList);
+
+
+//DONNTTTTTTTT DOOO IT HEREEEEEEEEEE
+                  //  reference3.removeValue();
                     // reference3.updateChildren(stockHashmap);
-                    reference3.setValue(stockHashmap);
-                    //reference3.setValue(stockHashmap);*/
+                   // reference3.setValue(stockHashmap);
+                    //reference3.setValue(stockHashmap);
 
                     /*stockHashmap.put("itemID", id);
                     stockHashmap.put("stock", newStock);
                     reference3.setValue(stockHashmap);*/
 
 
-
+                   // updateList.add(newStock);
+                    //System.out.println("REAL UPDATELIST " + updateList);
 
 
 
@@ -306,10 +354,53 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                    // System.out.println("newstock: " + newStock);
 
 
-               } //end for loop
+                   // reference3.setValue(stockHashmap);
 
-                Intent intent = new Intent(CustomerCheckoutActivity.this, AfterOrderActivity.class);
-                startActivity(intent);
+                    //updateStock(myid, newStock);
+
+                  //  DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference("StockLevel").child(myID);
+                  //  reference4.setValue(stockHashmap);
+
+                    //create new db for stock?
+
+                } //end for loop
+                System.out.println("NEW LIST OUTSIDE FOR LOOP: " + newList);
+
+              //  Intent intent = new Intent(CustomerCheckoutActivity.this, AfterOrderActivity.class);
+              //  startActivity(intent);
+
+                //create new for loop
+                //create new list storing new stock in it!
+               // System.out.println("UPDATELIST" + updateList);
+
+
+
+              /* for(int j=0; j<idList.size(); j++){
+                    String itemID = idList.get(j);
+                    String updatedQuantity = updateList.get(j);
+
+                    HashMap<String, Object> updateHashmap = new HashMap<>();
+
+                    updateHashmap.put("itemID", itemID);
+                    updateHashmap.put("stock", updatedQuantity);
+                   // reference3.setValue(stockHashmap);
+
+                    DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference("StockLevel").child(itemID);
+                    reference4.setValue(updateHashmap);
+
+
+
+                }*/
+
+
+
+
+
+
+
+
+
+
 
             }
         });

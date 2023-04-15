@@ -51,5 +51,26 @@ public class CustomerMainActivity extends AppCompatActivity {
             }
         });
 
+        viewOrder = findViewById(R.id.viewOrder);
+        viewOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerMainActivity.this, CustomerOrderActivity.class);
+                intent.putExtra("customerID", customerID);
+                startActivity(intent);
+            }
+        });
+
+
+        viewProfile = findViewById(R.id.viewProfile);
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerMainActivity.this, CustomerProfileActivity.class);
+                intent.putExtra("customerID", customerID);
+                startActivity(intent);
+            }
+        });
+
     }
 }

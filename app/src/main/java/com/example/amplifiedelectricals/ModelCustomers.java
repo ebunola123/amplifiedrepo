@@ -3,23 +3,31 @@ package com.example.amplifiedelectricals;
 public class ModelCustomers {
 
     String firstName;
-    String surname;
+    String lastName;
     String email;
     String addressLine1;
     String addressLine2;
     String county;
     String country;
     String postcode;
+    String cardName;
+    String cardNumber;
+    String expiryDate;
+    String cvc;
 
-    public ModelCustomers(String firstName, String surname, String email, String addressLine1, String addressLine2, String county, String country, String postcode) {
+    public ModelCustomers(String firstName, String lastName, String email, String addressLine1, String addressLine2, String county, String country, String postcode, String cardName, String cardNumber, String expiryDate, String cvc) {
         this.firstName = firstName;
-        this.surname = surname;
+        this.lastName = lastName;
         this.email = email;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.county = county;
         this.country = country;
         this.postcode = postcode;
+        this.cardName = cardName;
+        this.cardNumber = cardNumber;
+        this.expiryDate = expiryDate;
+        this.cvc = cvc;
     }
 
     public ModelCustomers(){
@@ -34,12 +42,12 @@ public class ModelCustomers {
         this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -88,5 +96,37 @@ public class ModelCustomers {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public String getCvc() {
+        return cvc;
+    }
+
+    public void setCvc(String cvc) {
+        this.cvc = cvc;
     }
 }
