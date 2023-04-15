@@ -13,6 +13,27 @@
         android:theme="@style/Theme.AmplifiedElectricals"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerPurchaseHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminCustomerProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CustomerListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CustomerOrderDetailsActicity"
             android:exported="false">
             <meta-data

@@ -37,6 +37,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
         holder.manTV.setText(order.getManufacturer());
         holder.quantityTV.setText(order.getQuantity());*/
         holder.dateTV.setText(order.getDate() + "  -  ");
+        holder.timeTV.setText(order.getTime());
 
         //do timestam as well
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -56,12 +57,13 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
     public class CustomerOrderViewHolder extends RecyclerView.ViewHolder {
 
-        TextView dateTV;
+        TextView dateTV, timeTV;
 
         public CustomerOrderViewHolder(@NonNull View itemView) {
             super(itemView);
 
             dateTV = itemView.findViewById(R.id.dateTV);
+            timeTV = itemView.findViewById(R.id.timeTV);
         }
 
 

@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class CustomerMainActivity extends AppCompatActivity {
 
@@ -71,6 +77,19 @@ public class CustomerMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Date time = Calendar.getInstance().getTime();
+        System.out.println("time: " + time);
+        String time2 = String.valueOf(time.getTime());
+        System.out.println("time2: " + time2);
+
+        Time now = new Time();
+        now.setToNow();
+        System.out.println("now: " + now);
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        System.out.println("currentTime: " + currentTime);
+
+
 
     }
 }

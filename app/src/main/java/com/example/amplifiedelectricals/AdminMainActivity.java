@@ -58,6 +58,15 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
 
+        viewCustomer = findViewById(R.id.viewCustomer);
+        viewCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this, CustomerListActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

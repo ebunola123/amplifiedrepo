@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class CustomerCheckoutActivity extends AppCompatActivity {
 
@@ -215,7 +216,11 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                     Date todayDate = new Date();
                     String date = currentDate.format(todayDate);
 
-                    Date time = Calendar.getInstance().getTime();
+
+                    String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                    System.out.println("currentTime: " + currentTime);
+
+                    String date_time = date + "-" + currentTime;
 
                     //create order db
                     DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Orders").child(customerID);
@@ -225,7 +230,7 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                     orderHashmap.put("manufacturer", manufacturer);
                     orderHashmap.put("quantity",qList);
                     orderHashmap.put("date",date);
-                    orderHashmap.put("time", time);
+                    orderHashmap.put("time", currentTime);
                     orderHashmap.put("price", price);
                     orderHashmap.put("totalPrice", total);
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +25,7 @@ public class CustomerOrderDetailsActicity extends AppCompatActivity {
 
     CustomerOrderDetailsAdapter adapter;
     RecyclerView recyclerView;
+    TextView fullPriceTV;
     ArrayList<ModelOrder> orderList;
 
     @Override
@@ -46,6 +48,8 @@ public class CustomerOrderDetailsActicity extends AppCompatActivity {
         Intent i = getIntent();
         String orderDate = i.getStringExtra("orderDate");
         System.out.println(orderDate);
+
+        fullPriceTV = findViewById(R.id.fullPriceTV);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -71,6 +75,7 @@ public class CustomerOrderDetailsActicity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     ModelOrder order = dataSnapshot.getValue(ModelOrder.class);
                     orderList.add(order);
+                    fullPriceTV.setText(order.getTotalPrice());
                 }
             } else {
                 Toast.makeText(CustomerOrderDetailsActicity.this, "No Order Information", Toast.LENGTH_SHORT).show();

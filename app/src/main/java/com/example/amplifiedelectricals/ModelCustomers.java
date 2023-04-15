@@ -4,26 +4,30 @@ public class ModelCustomers {
 
     String firstName;
     String lastName;
+    String customerID;
     String email;
     String addressLine1;
     String addressLine2;
     String county;
     String country;
     String postcode;
+    String phoneNumber;
     String cardName;
     String cardNumber;
     String expiryDate;
     String cvc;
 
-    public ModelCustomers(String firstName, String lastName, String email, String addressLine1, String addressLine2, String county, String country, String postcode, String cardName, String cardNumber, String expiryDate, String cvc) {
+    public ModelCustomers(String firstName, String lastName, String customerID, String email, String addressLine1, String addressLine2, String county, String country, String postcode, String phoneNumber, String cardName, String cardNumber, String expiryDate, String cvc) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.customerID = customerID;
         this.email = email;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.county = county;
         this.country = country;
         this.postcode = postcode;
+        this.phoneNumber = phoneNumber;
         this.cardName = cardName;
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
@@ -48,6 +52,14 @@ public class ModelCustomers {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
     public String getEmail() {
@@ -96,6 +108,14 @@ public class ModelCustomers {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getCardName() {
