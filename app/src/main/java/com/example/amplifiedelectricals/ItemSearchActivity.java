@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,6 +22,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ItemSearchActivity extends AppCompatActivity {
 
@@ -31,6 +34,8 @@ public class ItemSearchActivity extends AppCompatActivity {
     ManufacturerSearchAdapter manufacturerSearchAdapter;
     ArrayList<ModelItems> itemList;
     RecyclerView recyclerView;
+
+    ImageButton sortButton, sortButton2;
 
 /*
     Intent i = getIntent();
@@ -49,7 +54,7 @@ public class ItemSearchActivity extends AppCompatActivity {
         String searchType = i2.getStringExtra("searchType");
         System.out.println(searchType);
 
-        searchButton = findViewById(R.id.searchButton);
+        //searchButton = findViewById(R.id.searchButton);
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -67,6 +72,11 @@ public class ItemSearchActivity extends AppCompatActivity {
         //if searchType = category
         //then adapter = CategorySearchAdapter
         //create 3 adapters for each search type!! and set the recyclerview adapter to the correct one!
+
+
+
+        //if i create a button for sorting, -> then depending on the searchType (title, man, cat) -> the
+        //arraylist will be sorted in descending or ascending order ()alphabetical
 
 
 
@@ -104,6 +114,7 @@ public class ItemSearchActivity extends AppCompatActivity {
                 itemList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     ModelItems items = dataSnapshot.getValue(ModelItems.class);
+                   // items.getTitle().compareToIgnoreCase(s);
 
                     assert items != null;
                     itemList.add(items);
@@ -168,8 +179,60 @@ public class ItemSearchActivity extends AppCompatActivity {
             }
         });
 
+        sortButton = findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(itemList, new Comparator<ModelItems>() {
+                    @Override
+                    public int compare(ModelItems o1, ModelItems o2) {
+                        if(searchType.equals("category")){
+                            return o1.getCategory().compareToIgnoreCase(o2.getCategory());
+                        } else if(searchType.equals("title")){
+                            return o1.getTitle().compareToIgnoreCase(o2.getTitle());
+                        } else if(searchType.equals("manufacturer")){
+                            return o1.getManufacturer().compareToIgnoreCase(o2.getManufacturer());
+                        } else {
+                            return o1.getTitle().compareTo(o2.getTitle());
+                        }
 
+                    }
+                });
+
+                if(searchType.equals("category")){
+                    categorySearchAdapter.notifyDataSetChanged();
+                } else if(searchType.equals("title")){
+                    titleSearchAdapter.notifyDataSetChanged();
+                } else if(searchType.equals("manufacturer")){
+                    manufacturerSearchAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
+        sortButton2 = findViewById(R.id.sortButton2);
+        sortButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.reverse(itemList);
+
+                if(searchType.equals("category")){
+                    categorySearchAdapter.notifyDataSetChanged();
+                } else if(searchType.equals("title")){
+                    titleSearchAdapter.notifyDataSetChanged();
+                } else if(searchType.equals("manufacturer")){
+                    manufacturerSearchAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+        //when searchtype = category it is automatically sorted in alphabetical order
+
+        //tested without this code, arraylist seems to just be automoatically sorted in alphabetical order
+        //and is case sensitive
     }
+
 
 
 

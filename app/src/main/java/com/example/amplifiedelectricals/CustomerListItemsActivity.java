@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,12 +19,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CustomerListItemsActivity extends AppCompatActivity {
 
     CustomerListItemsAdapter adapter;
     RecyclerView recyclerView;
     ArrayList<ModelItems> itemList;
+    ImageButton sortButton, sortButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +45,19 @@ public class CustomerListItemsActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String customerID = i.getStringExtra("customerID");
+        sortButton = findViewById(R.id.sortButton);
+        sortButton2 = findViewById(R.id.sortButton2);
+
+
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         itemList = new ArrayList<>();
         adapter = new CustomerListItemsAdapter(itemList, this, customerID);
         recyclerView.setAdapter(adapter);
+
+
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Items");
         reference.addValueEventListener(new ValueEventListener() {
@@ -62,6 +75,29 @@ public class CustomerListItemsActivity extends AppCompatActivity {
 
             }
         });
+
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(itemList, new Comparator<ModelItems>() {
+                    @Override
+                    public int compare(ModelItems o1, ModelItems o2) {
+                        return o1.getTitle().compareToIgnoreCase(o2.getTitle());
+                    }
+                });
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        sortButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.reverse(itemList);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
 
     }
 }
