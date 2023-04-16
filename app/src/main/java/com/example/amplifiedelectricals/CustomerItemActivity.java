@@ -35,6 +35,8 @@ public class CustomerItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_item);
 
+        //open stock db with the itemid - if stock is less than 0 or if stock is less than count, then give toast message
+
         Intent i = getIntent();
         String customerID = i.getStringExtra("customerID");
         String itemID = i.getStringExtra("itemID");

@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,7 @@ public class ItemProfileActivity extends AppCompatActivity {
 
     EditText titleET, maufacturerET, priceET, categoryET;
     Button update;
+    ImageButton deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,18 @@ public class ItemProfileActivity extends AppCompatActivity {
 
                 reference.setValue(editHashmap);
 
+            }
+        });
+
+        deleteButton = findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ItemProfileActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                reference.removeValue();
+
+                Intent intent = new Intent(ItemProfileActivity.this, AdminSearchOptionsActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -44,7 +44,7 @@ public class AdminMainActivity extends AppCompatActivity {
         viewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminMainActivity.this, AdminViewItemActivity.class);
+                Intent intent = new Intent(AdminMainActivity.this, AdminSearchOptionsActivity.class);
                 startActivity(intent);
             }
         });

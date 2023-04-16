@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,55 +21,36 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ItemSearchActivity extends AppCompatActivity {
+public class AdminItemSearchActivity extends AppCompatActivity {
 
     EditText searchET;
     ImageView searchButton;
-    CategorySearchAdapter categorySearchAdapter;
-    TitleSearchAdapter titleSearchAdapter;
-    ManufacturerSearchAdapter manufacturerSearchAdapter;
+
+    AdminCategorySearchAdapter categorySearchAdapter;
+    AdminTitleSearchAdapter titleSearchAdapter;
+    AdminManufacturerSearchAdapter manufacturerSearchAdapter;
+
     ArrayList<ModelItems> itemList;
     RecyclerView recyclerView;
-
-/*
-    Intent i = getIntent();
-    String customerID;
-    String searchType;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_search);
+        setContentView(R.layout.activity_admin_item_search);
 
-       Intent i = getIntent();
-        String customerID = i.getStringExtra("customerID");
-        /* String searchType = i.getStringExtra("searchType");*/
-        Intent i2 = getIntent();
-        String searchType = i2.getStringExtra("searchType");
-        System.out.println(searchType);
+        Intent i = getIntent();
+        String searchType = i.getStringExtra("searchType");
 
         searchButton = findViewById(R.id.searchButton);
-
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         itemList = new ArrayList<>();
-
 
         //method name
         readCategoryItems();
 
-
-
-        //if searchType = category
-        //then adapter = CategorySearchAdapter
-        //create 3 adapters for each search type!! and set the recyclerview adapter to the correct one!
-
-
-
-        //searchButton = findViewById(R.id.searchButton);
         searchET = findViewById(R.id.searchET);
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -86,9 +66,7 @@ public class ItemSearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
-
     }
-
 
     private void searchItems(String s){
         Intent i = getIntent();
@@ -109,9 +87,9 @@ public class ItemSearchActivity extends AppCompatActivity {
                     itemList.add(items);
 
                 }
-                categorySearchAdapter = new CategorySearchAdapter(itemList, ItemSearchActivity.this, customerID);
-                manufacturerSearchAdapter = new ManufacturerSearchAdapter(itemList, ItemSearchActivity.this, customerID);
-                titleSearchAdapter = new TitleSearchAdapter(itemList, ItemSearchActivity.this, customerID);
+                categorySearchAdapter = new AdminCategorySearchAdapter(itemList, AdminItemSearchActivity.this);
+                manufacturerSearchAdapter = new AdminManufacturerSearchAdapter(itemList, AdminItemSearchActivity.this);
+                titleSearchAdapter = new AdminTitleSearchAdapter(itemList, AdminItemSearchActivity.this);
 
                 if(searchType.equals("category")){
                     recyclerView.setAdapter(categorySearchAdapter);
@@ -132,7 +110,6 @@ public class ItemSearchActivity extends AppCompatActivity {
 
     private void readCategoryItems(){
         Intent i = getIntent();
-        String customerID = i.getStringExtra("customerID");
         String searchType = i.getStringExtra("searchType");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Items");
 
@@ -147,9 +124,9 @@ public class ItemSearchActivity extends AppCompatActivity {
                         assert items != null;
                         itemList.add(items);
                     }
-                    categorySearchAdapter = new CategorySearchAdapter(itemList, ItemSearchActivity.this, customerID);
-                    manufacturerSearchAdapter = new ManufacturerSearchAdapter(itemList, ItemSearchActivity.this, customerID);
-                    titleSearchAdapter = new TitleSearchAdapter(itemList, ItemSearchActivity.this, customerID);
+                    categorySearchAdapter = new AdminCategorySearchAdapter(itemList, AdminItemSearchActivity.this);
+                    manufacturerSearchAdapter = new AdminManufacturerSearchAdapter(itemList, AdminItemSearchActivity.this);
+                    titleSearchAdapter = new AdminTitleSearchAdapter(itemList, AdminItemSearchActivity.this);
 
                     if(searchType.equals("category")){
                         recyclerView.setAdapter(categorySearchAdapter);
@@ -170,6 +147,14 @@ public class ItemSearchActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+
+
 
 
 

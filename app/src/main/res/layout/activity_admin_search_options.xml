@@ -5,44 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CustomerSearchOptionsActivity">
-
+    android:gravity="center"
+    tools:context=".AdminSearchOptionsActivity">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/viewAll"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:text="View All Items"/>
+        android:text="View all items"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchTitle"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:text="Search By Title"/>
+        android:text="Search by title"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchCategory"
         android:layout_gravity="center"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Search By Category"/>
+        android:text="Search by category"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchManufacturer"
-        android:padding="10dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Search By Manufacturer"/>
-
+        android:text="Search by Manufacturer"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>

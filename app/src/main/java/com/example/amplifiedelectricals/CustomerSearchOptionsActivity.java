@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class CustomerSearchActivity extends AppCompatActivity {
+public class CustomerSearchOptionsActivity extends AppCompatActivity {
 
     Button viewAll, searchTitle, searchCategory, searchManufacturer;
 
@@ -23,7 +23,7 @@ public class CustomerSearchActivity extends AppCompatActivity {
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerSearchActivity.this, CustomerListItemsActivity.class);
+                Intent intent = new Intent(CustomerSearchOptionsActivity.this, CustomerListItemsActivity.class);
                 intent.putExtra("customerID", customerID);
                 startActivity(intent);
             }
@@ -34,7 +34,7 @@ public class CustomerSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String searchType = "title";
-                Intent intent = new Intent(CustomerSearchActivity.this, ItemSearchActivity.class);
+                Intent intent = new Intent(CustomerSearchOptionsActivity.this, ItemSearchActivity.class);
                 intent.putExtra("customerID", customerID);
                 intent.putExtra("searchType", searchType);
                 startActivity(intent);
@@ -46,7 +46,7 @@ public class CustomerSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String searchType = "category";
-                Intent intent = new Intent(CustomerSearchActivity.this, ItemSearchActivity.class);
+                Intent intent = new Intent(CustomerSearchOptionsActivity.this, ItemSearchActivity.class);
                 intent.putExtra("customerID", customerID);
                 intent.putExtra("searchType", searchType);
                 startActivity(intent);
@@ -58,7 +58,7 @@ public class CustomerSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String searchType = "manufacturer";
-                Intent intent = new Intent(CustomerSearchActivity.this, ItemSearchActivity.class);
+                Intent intent = new Intent(CustomerSearchOptionsActivity.this, ItemSearchActivity.class);
                 intent.putExtra("customerID", customerID);
                 intent.putExtra("searchType", searchType);
                 startActivity(intent);
