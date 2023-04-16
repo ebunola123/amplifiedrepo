@@ -17,8 +17,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/categoryTV"
-            android:text="Category"
+            android:id="@+id/manufacturerTV"
+            android:text="Manufacturer"
             android:layout_marginTop="15dp"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -37,8 +37,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/manufacturerTV"
-        android:text="Manufacturer"
+        android:id="@+id/categoryTV"
+        android:text="Category"
         android:textStyle="italic"/>
 
     <TextView

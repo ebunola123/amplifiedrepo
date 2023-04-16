@@ -26,6 +26,8 @@ public class ItemSearchActivity extends AppCompatActivity {
     EditText searchET;
     ImageButton searchButton;
     CategorySearchAdapter categorySearchAdapter;
+    TitleSearchAdapter titleSearchAdapter;
+    ManufacturerSearchAdapter manufacturerSearchAdapter;
     ArrayList<ModelItems> itemList;
     RecyclerView recyclerView;
 
@@ -39,9 +41,9 @@ public class ItemSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_search);
 
-        /*Intent i = getIntent();
+       Intent i = getIntent();
         String customerID = i.getStringExtra("customerID");
-        String searchType = i.getStringExtra("searchType");*/
+        /* String searchType = i.getStringExtra("searchType");*/
         Intent i2 = getIntent();
         String searchType = i2.getStringExtra("searchType");
         System.out.println(searchType);
@@ -54,9 +56,13 @@ public class ItemSearchActivity extends AppCompatActivity {
 
         itemList = new ArrayList<>();
 
+
         //method name
         readCategoryItems();
 
+        if(searchType.equals("title")){
+
+        }
 
 
         //if searchType = category
@@ -105,7 +111,16 @@ public class ItemSearchActivity extends AppCompatActivity {
 
                 }
                 categorySearchAdapter = new CategorySearchAdapter(itemList, ItemSearchActivity.this, customerID);
-                recyclerView.setAdapter(categorySearchAdapter);
+                manufacturerSearchAdapter = new ManufacturerSearchAdapter(itemList, ItemSearchActivity.this, customerID);
+                titleSearchAdapter = new TitleSearchAdapter(itemList, ItemSearchActivity.this, customerID);
+
+                if(searchType.equals("category")){
+                    recyclerView.setAdapter(categorySearchAdapter);
+                } else if(searchType.equals("title")){
+                    recyclerView.setAdapter(titleSearchAdapter);
+                } else if(searchType.equals("manufacturer")){
+                    recyclerView.setAdapter(manufacturerSearchAdapter);
+                }
             }
 
             @Override
@@ -119,6 +134,7 @@ public class ItemSearchActivity extends AppCompatActivity {
     private void readCategoryItems(){
         Intent i = getIntent();
         String customerID = i.getStringExtra("customerID");
+        String searchType = i.getStringExtra("searchType");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Items");
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -133,7 +149,16 @@ public class ItemSearchActivity extends AppCompatActivity {
                         itemList.add(items);
                     }
                     categorySearchAdapter = new CategorySearchAdapter(itemList, ItemSearchActivity.this, customerID);
-                    recyclerView.setAdapter(categorySearchAdapter);
+                    manufacturerSearchAdapter = new ManufacturerSearchAdapter(itemList, ItemSearchActivity.this, customerID);
+                    titleSearchAdapter = new TitleSearchAdapter(itemList, ItemSearchActivity.this, customerID);
+
+                    if(searchType.equals("category")){
+                        recyclerView.setAdapter(categorySearchAdapter);
+                    } else if(searchType.equals("title")){
+                        recyclerView.setAdapter(titleSearchAdapter);
+                    } else if(searchType.equals("manufacturer")){
+                        recyclerView.setAdapter(manufacturerSearchAdapter);
+                    }
                 }
 
             }
