@@ -43,10 +43,11 @@ public class CustomerOrderDetailsActicity extends AppCompatActivity {
             return;
         }
 
-        String customerID = auth.getUid();
+        //String customerID = auth.getUid();
 
         Intent i = getIntent();
         String orderDate = i.getStringExtra("orderDate");
+        String customerID = i.getStringExtra("customerID");
         System.out.println(orderDate);
 
         fullPriceTV = findViewById(R.id.fullPriceTV);

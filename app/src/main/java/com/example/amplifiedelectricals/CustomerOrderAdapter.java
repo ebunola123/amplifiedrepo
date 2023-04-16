@@ -16,10 +16,12 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
     private final List<ModelOrder> orderList;
     private final Context context;
+    String customerID;
 
-    public CustomerOrderAdapter(List<ModelOrder> orderList, Context context) {
+    public CustomerOrderAdapter(List<ModelOrder> orderList, Context context, String customerID) {
         this.orderList = orderList;
         this.context = context;
+        this.customerID = customerID;
     }
 
     @NonNull
@@ -45,6 +47,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
             public void onClick(View v) {
                 Intent intent = new Intent(context, CustomerOrderDetailsActicity.class);
                 intent.putExtra("orderDate", order.getDate());
+                intent.putExtra("customerID", customerID);
                 context.startActivity(intent);
             }
         });

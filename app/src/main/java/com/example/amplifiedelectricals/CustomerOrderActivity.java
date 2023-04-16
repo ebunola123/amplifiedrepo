@@ -44,7 +44,7 @@ public class CustomerOrderActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderList = new ArrayList<>();
-        adapter = new CustomerOrderAdapter(orderList, this);
+        adapter = new CustomerOrderAdapter(orderList, this, customerID);
         recyclerView.setAdapter(adapter);
 
 

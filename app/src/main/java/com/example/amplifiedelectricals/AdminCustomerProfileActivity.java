@@ -70,7 +70,9 @@ public class AdminCustomerProfileActivity extends AppCompatActivity {
         viewOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdminCustomerProfileActivity.this, "Working", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminCustomerProfileActivity.this, CustomerPurchaseHistoryActivity.class);
+                intent.putExtra("customerID", customerID);
+                startActivity(intent);
             }
         });
 

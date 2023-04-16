@@ -103,6 +103,12 @@ public class UpdateStockActivity extends AppCompatActivity {
                 String oldInt = currentStock.getText().toString();
                 int old = Integer.parseInt(oldInt);
                 int newStock  = Integer.parseInt(stock);
+
+                if (newStock <0){
+                    Toast.makeText(UpdateStockActivity.this, "A Negavtive Amount Was Entered - Stock Adjusted Accordingly", Toast.LENGTH_LONG).show();
+                }
+
+
                 int updatedStock = old + newStock;
                 String updated = Integer.toString(updatedStock);
 
@@ -110,7 +116,7 @@ public class UpdateStockActivity extends AppCompatActivity {
                 stockHashmap.put("stock", updated);
 
                 reference2.setValue(stockHashmap);
-                Toast.makeText(UpdateStockActivity.this, "Stock Updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateStockActivity.this, "Stock Updated Accordingly", Toast.LENGTH_SHORT).show();
 
 
 
