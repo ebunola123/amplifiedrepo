@@ -257,6 +257,8 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                            System.out.println("ItemID - " + myID);
 
                            String currentStock = stock.getStock();
+
+                           //maths
                             a = Integer.parseInt(currentStock);
                             System.out.println("a: " +a);
                             b = Integer.parseInt(qList);
@@ -265,10 +267,12 @@ public class CustomerCheckoutActivity extends AppCompatActivity {
                            int c = a - b;
                            System.out.println("c: " +c);
                            newStock = "0";
+
+                           //pushed into db
                            newStock = Integer.toString(c);
-                           updateList.add(newStock);
-                           newList.add(newStock);
-                           System.out.println("NEW LIST IN DB REF LOOP: " + newList);
+                           //updateList.add(newStock);
+                           //newList.add(newStock);
+                           //System.out.println("NEW LIST IN DB REF LOOP: " + newList);
 
 
                            //PUT AS PARAMS AND SEND TO NEW METHOD

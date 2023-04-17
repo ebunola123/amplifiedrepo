@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:id="@+id/scroll"
     tools:context=".CustomerItemActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -77,4 +85,40 @@
         android:text="Add To cart"
         android:id="@+id/addToCart"/>
 
-</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Comments"
+                android:textStyle="bold"
+                android:layout_marginRight="100dp"
+                android:textSize="20sp"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:src="@drawable/ic_baseline_add_comment_24"
+                android:id="@+id/addComment"/>
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#DCF8FB"
+            android:id="@+id/recyclerView"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

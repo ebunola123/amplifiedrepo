@@ -1,10 +1,12 @@
 package com.example.amplifiedelectricals;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -46,7 +48,6 @@ public class CustomerListItemsActivity extends AppCompatActivity {
         Intent i = getIntent();
         String customerID = i.getStringExtra("customerID");
         sortButton = findViewById(R.id.sortButton);
-        sortButton2 = findViewById(R.id.sortButton2);
 
 
 
@@ -79,23 +80,38 @@ public class CustomerListItemsActivity extends AppCompatActivity {
         sortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Collections.sort(itemList, new Comparator<ModelItems>() {
+                String[] sortOptions = new String[]{"Ascending", "Descending"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(CustomerListItemsActivity.this);
+                builder.setTitle("Sort By")
+                        .setIcon(R.drawable.ic_baseline_sort_24);
+                builder.setSingleChoiceItems(sortOptions, -1, new DialogInterface.OnClickListener() {
                     @Override
-                    public int compare(ModelItems o1, ModelItems o2) {
-                        return o1.getTitle().compareToIgnoreCase(o2.getTitle());
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            //sort by ascending
+                            Collections.sort(itemList, new Comparator<ModelItems>() {
+                                @Override
+                                public int compare(ModelItems o1, ModelItems o2) {
+                                    return o1.getTitle().compareToIgnoreCase(o2.getTitle());
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+
+                        } else if (which == 1) {
+                            //sort by descendin
+                            Collections.reverse(itemList);
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                 });
-                adapter.notifyDataSetChanged();
+                //AlertDialog mDialog = builder.create();
+                //mDialog.show();
+                builder.show();
+
             }
         });
 
-        sortButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Collections.reverse(itemList);
-                adapter.notifyDataSetChanged();
-            }
-        });
+
 
 
 

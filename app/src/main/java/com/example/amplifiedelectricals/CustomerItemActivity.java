@@ -1,10 +1,15 @@
 package com.example.amplifiedelectricals;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,22 +17,32 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CustomerItemActivity extends AppCompatActivity {
 
     TextView titleTV, manufacturerTV, priceTV, categoryTV, quantityTV;
     Button addToCart;
-    ImageButton less, more;
+    ImageButton less, more, addComment;
+    RecyclerView recyclerView;
     int count = 0;
+
+    String comment;
+    String firstName;
+
+    ItemCommentsAdapter adapter;
+    ArrayList<ModelComments> commentList;
 
 
     @Override
@@ -35,11 +50,54 @@ public class CustomerItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_item);
 
+        //when writing comment, open alert dialog and add star rating there!
+
         //open stock db with the itemid - if stock is less than 0 or if stock is less than count, then give toast message
+
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if(currentUser == null){
+            Intent intent = new Intent(this, CustomerLoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        String email = currentUser.getEmail();
 
         Intent i = getIntent();
         String customerID = i.getStringExtra("customerID");
         String itemID = i.getStringExtra("itemID");
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        commentList = new ArrayList<>();
+        adapter = new ItemCommentsAdapter(commentList, this);
+        recyclerView.setAdapter(adapter);
+
+
+       //
+        DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference("Comments").child(itemID);
+        reference4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    ModelComments comments = dataSnapshot.getValue(ModelComments.class);
+                    commentList.add(comments);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         titleTV = findViewById(R.id.titleTV);
         manufacturerTV = findViewById(R.id.manufacturerTV);
@@ -74,6 +132,19 @@ public class CustomerItemActivity extends AppCompatActivity {
                 quantityTV.setText(amount);
             }
         });
+
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Customers").child(customerID);
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ModelCustomers customers = snapshot.getValue(ModelCustomers.class);
+                firstName = customers.getFirstName();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Items").child(itemID);
         reference.addValueEventListener(new ValueEventListener() {
@@ -119,6 +190,51 @@ public class CustomerItemActivity extends AppCompatActivity {
                 }
                 
 
+            }
+        });
+
+        addComment = findViewById(R.id.addComment);
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mydialog = new AlertDialog.Builder(CustomerItemActivity.this);
+                mydialog.setTitle("Leave a Comment...");
+
+                final EditText commentET = new EditText(CustomerItemActivity.this);
+                commentET.setInputType(InputType.TYPE_CLASS_TEXT);
+                mydialog.setView(commentET);
+
+                mydialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        comment = commentET.getText().toString();
+
+                        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+                        Date todayDate = new Date();
+                        String date = currentDate.format(todayDate);
+
+                        Toast.makeText(CustomerItemActivity.this, "Comment" + comment, Toast.LENGTH_SHORT).show();
+                        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Comments").child(itemID);
+
+
+                        HashMap<String, Object> commentHashmap = new HashMap<>();
+                        commentHashmap.put("comment", comment);
+                        commentHashmap.put("itemID", itemID);
+                        commentHashmap.put("email", email);
+                        commentHashmap.put("name", firstName);
+                        commentHashmap.put("date", date);
+                        reference1.push().setValue(commentHashmap);
+
+                    }
+                });
+
+                mydialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                mydialog.show();
             }
         });
 

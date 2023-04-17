@@ -12,19 +12,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_sort_24"
-            android:layout_marginLeft="360dp"
-            android:id="@+id/sortButton"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_sort_24"
-            android:layout_marginLeft="360dp"
-            android:id="@+id/sortButton2"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,11 +21,6 @@
             android:backgroundTint="#4DD5E6"
             android:orientation="horizontal">
 
-        <EditText
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchET"
-            android:hint="Search...."/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -44,6 +28,20 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/searchButton"
                 android:src="@drawable/ic_baseline_search_24"/>
+
+
+            <EditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchET"
+            android:hint="Search...."/>
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_sort_24"
+                android:id="@+id/sortButton"/>
 
         </LinearLayout>
 
