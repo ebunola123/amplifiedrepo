@@ -51,6 +51,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -75,15 +76,33 @@
             android:src="@drawable/ic_baseline_add_24"/>
 
 
+
     </LinearLayout>
 
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add To cart"
         android:id="@+id/addToCart"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/rateButton"
+        android:src="@drawable/ic_baseline_star_24"/>
+
+</LinearLayout>
+
+
+
+
 
 
         <LinearLayout

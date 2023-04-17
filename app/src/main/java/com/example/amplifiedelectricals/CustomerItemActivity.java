@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +36,7 @@ public class CustomerItemActivity extends AppCompatActivity {
 
     TextView titleTV, manufacturerTV, priceTV, categoryTV, quantityTV;
     Button addToCart;
-    ImageButton less, more, addComment;
+    ImageButton less, more, addComment, rateButton;
     RecyclerView recyclerView;
     int count = 0;
 
@@ -213,17 +215,21 @@ public class CustomerItemActivity extends AppCompatActivity {
                         Date todayDate = new Date();
                         String date = currentDate.format(todayDate);
 
-                        Toast.makeText(CustomerItemActivity.this, "Comment" + comment, Toast.LENGTH_SHORT).show();
-                        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Comments").child(itemID);
+                        if(comment.equals("")){
+                            Toast.makeText(CustomerItemActivity.this, "Please Enter A Comment", Toast.LENGTH_SHORT).show();
+                        } else {
+                            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Comments").child(itemID);
+
+                            HashMap<String, Object> commentHashmap = new HashMap<>();
+                            commentHashmap.put("comment", comment);
+                            commentHashmap.put("itemID", itemID);
+                            commentHashmap.put("email", email);
+                            commentHashmap.put("name", firstName);
+                            commentHashmap.put("date", date);
+                            reference1.push().setValue(commentHashmap);
+                        }
 
 
-                        HashMap<String, Object> commentHashmap = new HashMap<>();
-                        commentHashmap.put("comment", comment);
-                        commentHashmap.put("itemID", itemID);
-                        commentHashmap.put("email", email);
-                        commentHashmap.put("name", firstName);
-                        commentHashmap.put("date", date);
-                        reference1.push().setValue(commentHashmap);
 
                     }
                 });
@@ -238,6 +244,62 @@ public class CustomerItemActivity extends AppCompatActivity {
             }
         });
 
+        rateButton = findViewById(R.id.rateButton);
+        rateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rateItem();
+            }
+        });
+
+
+    }
+
+    private void rateItem() {
+        Intent i = getIntent();
+        String customerID = i.getStringExtra("customerID");
+        String itemID = i.getStringExtra("itemID");
+
+        final AlertDialog.Builder mydialog = new AlertDialog.Builder(CustomerItemActivity.this);
+        final RatingBar ratingBar = new RatingBar(this);
+        ratingBar.setMax(5);
+
+        mydialog.setTitle("Rate Item");
+
+        ratingBar.setNumStars(5);
+        mydialog.setView(ratingBar);
+
+        mydialog.setPositiveButton("Rate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String val = String.valueOf(ratingBar.getProgress());
+                System.out.println(val);
+
+                if(val.equals("")){
+                    Toast.makeText(CustomerItemActivity.this, "Please enter a rating", Toast.LENGTH_SHORT).show();
+                    ratingBar.requestFocus();
+                } else {
+                    DatabaseReference reference5 = FirebaseDatabase.getInstance().getReference("Ratings").child(itemID).child(customerID);
+                    HashMap<String, Object> ratingHashmap = new HashMap<>();
+                    ratingHashmap.put("rating", val);
+                    ratingHashmap.put("customerID", customerID);
+                    ratingHashmap.put("itemID", itemID);
+
+                    reference5.setValue(ratingHashmap);
+                }
+
+            }
+        });
+
+        mydialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        mydialog.create();
+        mydialog.show();
 
     }
 }
