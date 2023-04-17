@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerOrderActivity">
+    tools:context=".customerorders.CustomerOrderActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,12 +19,6 @@
         android:layout_marginBottom="20dp"
         android:id="@+id/recyclerView"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#DCF8FB"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/recyclerView2"/>
 
     </LinearLayout>
 </ScrollView>

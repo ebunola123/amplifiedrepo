@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CustomerSearchOptionsActivity">
+    tools:context=".customeritemsearch.CustomerSearchOptionsActivity">
 
 
     <Button
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/viewAll"
         android:padding="10dp"
-        android:layout_marginTop="10dp"
+        android:backgroundTint="#81D7FD"
+        android:layout_marginTop="200dp"
         android:layout_gravity="center"
         android:text="View All Items"/>
 
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchTitle"
         android:padding="10dp"
+        android:backgroundTint="#81D7FD"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="Search By Title"/>
@@ -32,6 +34,7 @@
         android:id="@+id/searchCategory"
         android:layout_gravity="center"
         android:padding="10dp"
+        android:backgroundTint="#81D7FD"
         android:layout_marginTop="10dp"
         android:text="Search By Category"/>
 
@@ -40,6 +43,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchManufacturer"
         android:padding="10dp"
+        android:backgroundTint="#81D7FD"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="Search By Manufacturer"/>

@@ -13,70 +13,70 @@
         android:theme="@style/Theme.AmplifiedElectricals"
         tools:targetApi="31">
         <activity
-            android:name=".AdminItemSearchActivity"
+            android:name=".adminitemsearch.AdminItemSearchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminSearchOptionsActivity"
+            android:name=".adminitemsearch.AdminSearchOptionsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ItemSearchActivity"
+            android:name=".customeritemsearch.ItemSearchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerPurchaseHistoryActivity"
+            android:name=".adminmain.CustomerPurchaseHistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminCustomerProfileActivity"
+            android:name=".adminmain.AdminCustomerProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerListActivity"
+            android:name=".adminmain.CustomerListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerOrderDetailsActicity"
+            android:name=".customerorders.CustomerOrderDetailsActicity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerOrderActivity"
+            android:name=".customerorders.CustomerOrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerSearchOptionsActivity"
+            android:name=".customeritemsearch.CustomerSearchOptionsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerProfileActivity"
+            android:name=".customermain.CustomerProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -90,84 +90,77 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerCheckoutActivity"
+            android:name=".customercheckout.CustomerCheckoutActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerCartListActivity"
+            android:name=".customercheckout.CustomerCartListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerItemActivity"
+            android:name=".customeritemsearch.CustomerItemActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerListItemsActivity"
+            android:name=".customeritemsearch.CustomerListItemsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UpdateStockActivity"
+            android:name=".adminmain.UpdateStockActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UpdateStockListActivity"
+            android:name=".adminmain.UpdateStockListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ItemProfileActivity"
+            android:name=".adminitems.ItemProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminViewItemActivity"
+            android:name=".adminitems.AdminViewItemActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminLoginActivity"
+            android:name=".adminitems.AdminAddItemActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminAddItemActivity"
+            android:name=".adminmain.AdminMainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AdminMainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".CustomerLoginActivity"
+            android:name=".customermain.CustomerLoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -180,14 +173,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerRegisterActivity"
+            android:name=".customermain.CustomerRegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerMainActivity"
+            android:name=".customermain.CustomerMainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

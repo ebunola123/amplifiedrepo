@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ItemProfileActivity">
-
+    tools:context=".adminitems.ItemProfileActivity">
 
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/titleET"
         android:inputType="text"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:hint="Title"/>
 
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/maufacturerET"
         android:inputType="text"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:hint="Manufacturer"/>
 
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/priceET"
+        android:gravity="center"
         android:inputType="number"
         android:layout_marginBottom="10dp"
         android:hint="Price"/>
@@ -39,6 +41,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/categoryET"
         android:inputType="text"
+        android:gravity="center"
         android:hint="Category"/>
 
     <Button
@@ -46,6 +49,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/update"
         android:layout_marginTop="30dp"
+        android:backgroundTint="#81D7FD"
         android:layout_gravity="center"
         android:text="Update"/>
 

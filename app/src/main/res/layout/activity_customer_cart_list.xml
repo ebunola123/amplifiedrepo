@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scroll"
-    tools:context=".CustomerCartListActivity">
+    tools:context=".customercheckout.CustomerCartListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,31 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Checkout"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#81D7FD"
             android:id="@+id/checkout"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Delete Cart?"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/deleteCart"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_baseline_delete_24"/>
+
+        </LinearLayout>
+
+
 
 
 

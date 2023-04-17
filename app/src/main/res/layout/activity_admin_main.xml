@@ -6,7 +6,13 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_height="match_parent"
-    tools:context=".AdminMainActivity">
+    tools:context=".adminmain.AdminMainActivity">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_gravity="center"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:id="@+id/addItem"
+        android:backgroundTint="#81D7FD"
         android:text="Add Item"
         android:layout_marginBottom="10dp"/>
 
@@ -27,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/viewItem"
+        android:backgroundTint="#81D7FD"
         android:text="View Item"
         android:layout_marginBottom="10dp"/>
 
@@ -36,6 +44,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/updateStock"
         android:text="Update Stock"
+        android:backgroundTint="#81D7FD"
         android:layout_marginBottom="10dp"/>
 
 
@@ -44,6 +53,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/viewCustomer"
         android:text="View Customers"
+        android:backgroundTint="#81D7FD"
         android:layout_marginBottom="10dp"/>
 
 

@@ -4,7 +4,7 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerRegisterActivity">
+    tools:context=".customermain.CustomerRegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,9 +13,11 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="170dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"/>
+            android:layout_width="250dp"
+            android:layout_gravity="center"
+            android:layout_height="200dp"
+            android:src="@drawable/logo"/>
+
 
         <EditText
             android:id="@+id/firstName"
@@ -133,20 +135,11 @@
             android:layout_gravity="center"
             android:ems="10"
             android:paddingTop="10dp"
+            android:backgroundTint="#81D7FD"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:hint="Register" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:paddingTop="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:hint="Already Have An Account?"/>
 
         <TextView
             android:id="@+id/switchToLogin"
@@ -157,7 +150,7 @@
             android:paddingTop="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:hint="Login Here"/>
+            android:hint="Already Have An Account? Login Here"/>
 
 
 

@@ -6,20 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".AdminAddItemActivity">
+    tools:context=".adminitems.AdminAddItemActivity">
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:id="@+id/itemImage"
+        android:src="@drawable/headphones1"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/titleET"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Title"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/manET"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:hint="Manufacturer"/>
 
@@ -29,19 +37,23 @@
         android:id="@+id/priceET"
         android:inputType="number"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:hint="Price"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/categoryET"
+        android:gravity="center"
         android:hint="Category"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/save"
+        android:backgroundTint="#81D7FD"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:text="Save"/>
+        android:text="add item"/>
 
 </LinearLayout>

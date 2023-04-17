@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerProfileActivity">
+    tools:context=".customermain.CustomerProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,17 +27,19 @@
         android:text="Email@Gmail.com"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/firstNameET"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="First Name"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lastNameET"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="Last Name"/>
 
 
@@ -45,43 +47,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:text="ADDRESS"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addressLine1ET"
+        android:layout_marginTop="10dp"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="Address Line 1"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addressLine2ET"
+        android:gravity="center"
         android:textSize="15sp"
         android:hint="Address Line 2"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/postcodeET"
+        android:gravity="center"
         android:textSize="15sp"
         android:hint="Postcode"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/countyET"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="County"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/countryET"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="Country"/>
 
     <TextView
@@ -94,17 +103,19 @@
         android:text="PAYMENT METHOD"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cardNameET"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="Cardholder Name"/>
 
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cardNumberET"
         android:textSize="15sp"
+        android:gravity="center"
         android:hint="Card Number"/>
 
     <LinearLayout
@@ -130,8 +141,6 @@
             android:textSize="15sp"
             android:hint="CVC"/>
 
-
-
     </LinearLayout>
 
     <Button
@@ -139,6 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Save"
+        android:backgroundTint="#81D7FD"
         android:layout_marginBottom="20dp"
         android:id="@+id/save"/>
 

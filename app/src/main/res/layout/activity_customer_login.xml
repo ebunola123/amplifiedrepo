@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CustomerLoginActivity">
+    tools:context=".customermain.CustomerLoginActivity">
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_height="300dp"
+        android:src="@drawable/logo"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:ems="10"
         android:inputType="text"
-        android:paddingTop="10dp"
-        android:layout_marginTop="250dp"
         android:layout_marginBottom="5dp"
         android:hint="Email" />
 
@@ -38,20 +41,12 @@
         android:layout_gravity="center"
         android:ems="10"
         android:paddingTop="10dp"
+        android:backgroundTint="#81D7FD"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
-        android:hint="Register" />
+        android:text="Login" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:paddingTop="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:hint="New Account?"/>
+
 
     <TextView
         android:id="@+id/switchToRegister"
@@ -60,8 +55,8 @@
         android:layout_gravity="center"
         android:inputType="textPassword"
         android:paddingTop="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
-        android:hint="Register Here"/>
+        android:hint="New Account? Register Here"/>
 
 </LinearLayout>

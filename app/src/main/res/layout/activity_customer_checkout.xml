@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scroll"
-    tools:context=".CustomerCheckoutActivity">
+    tools:context=".customercheckout.CustomerCheckoutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Purchase"
+            android:backgroundTint="#81D7FD"
             android:id="@+id/purchase"/>
 
 
